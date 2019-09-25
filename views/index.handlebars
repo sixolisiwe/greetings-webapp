@@ -1,1 +1,86 @@
-node_modules/
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Greetings_Page </title>
+    <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-12">
+            <h1> Greeting</h1>
+        </div>
+    </div>
+
+    <form action="/greeted" method="POST">
+        <div class="row">
+            <div class="col-4">
+                <label for="exampleEmailInput">Name</label>
+                <input class="u-full-width nameSet" type="text" name="namesGreeted" placeholder="eg. Anathi">
+            </div>
+            <div class="col-4">
+                <h5> Select Language</h5>
+                <label class="">
+                    <input type="radio" name="langType" value="English" class="langSetting">
+                    <span class="label-body">English</span>
+                </label>
+
+                <label class="">
+                    <input type="radio" name="langType" value="Xhosa" class="langSetting">
+                    <span class="label-body">Xhosa</span>
+                </label>
+
+                <label class="">
+                    <input type="radio" name="langType" value="Afrikaans" class="langSetting">
+                    <span class="label-body">Afrikaans</span>
+                </label>
+            </div>
+
+            <div class="col-4">
+                <input type="submit" name="greetBtn" class="btnClick" value="Greet Me">
+            </div>
+
+        </div>
+    </form>
+
+    <div class="radio_row">
+        <div class="col-12">
+
+
+        </div>
+    </div>
+    <div class="col-12 mycounter">{{count}}</div>
+
+    <div class=" Greet_row">
+        <div class="col-12">
+
+            <p id="L1">{{greeted}}</p>
+
+
+
+</body>
+
+</html>
+
+
+
+
+</div>
+</div>
+</body>
+
+{{!-- <script src="./greet.js"></script>
+<script src= "./dom/greet-dom.js"></script>
+<script>
+    $("#myTextbox").keyup(function (e) {
+        var regex = /^[a-zA-Z]+$/;
+        (regex.test(this.value) !== true) ? this.value = this.value.replace(/[^a-zA-Z]+/, '') : this.value
+    });
+</script> --}}
+
+</html>

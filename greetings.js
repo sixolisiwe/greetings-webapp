@@ -3,29 +3,58 @@ module.exports = function Greet(nameList) {
 
     // var Language = []; // global variable
 
-    var namesGreeted =  nameList || {};
+    var namesGreeted = [];
+    let english = ""
 
+    // var allNames = []
     // var greetCount = 0;
 
-    function setName(nameVal) {
-        var name = nameVal.charAt(0).toUpperCase() + nameVal.slice(1);  
-    
-        if (namesGreeted[name] === undefined && name !== "") {
-            namesGreeted[name] = 0; 
+    function setName(userName) {
+        namesGreeted = {
+            name: userName,
+            counter: 0,
+            // langType: langGreet()
         }
-      return namesGreeted
+
+        // var name = user.charAt(0).toUpperCase() + user.slice(1);
+
+        // if (namesGreete && name !== "") {
+        //     namesGreeted[name] = 0;
+        // }
+        //return user
     }
 
-    function EnglishGreet(name) {
-        return "Hello, " + name;
+
+    function langGreet(name, langType) {
+
+        // console.log(name, langType);
+        if (langType === "English") {
+            namesGreeted.push({
+                language: "Hello, ",
+                names: name,
+                count: 1
+            })
+            // return("Hello, " + name)
+            // english = "Hello"
+        }
+        if (langType === "Afrikaans") {
+            namesGreeted.push({
+                language: "Hallo, ",
+                names: name,
+                count: 1
+            })
+        }
+        if (langType === "Xhosa") {
+            namesGreeted.push({
+                language: "Mholo, ",
+                names: name,
+                count: 1
+            })
+        }
     }
-    function XhosaGreet(name) {
-        
-        return "Mholo, " + name;
-    }
-    function AfrikaansGreet(name) {
-        return "Hallo, " + name;
-    }
+
+
+
 
     function getCount() {
         var count = Object.keys(namesGreeted);
@@ -33,17 +62,20 @@ module.exports = function Greet(nameList) {
     }
 
     function getName() {
-        return namesGreeted;
+        var string = ""
+        for (let x = 0; x < namesGreeted.length; x++) {
+          string = namesGreeted[x].language + namesGreeted[x].names
+        }
+        return string
     }
-  
+
     return {
         setName,
         getName,
         getCount,
-        EnglishGreet,
-        XhosaGreet,
-        AfrikaansGreet,
-      
+        langGreet,
+
+
     }
 
 }
