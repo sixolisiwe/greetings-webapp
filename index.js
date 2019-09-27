@@ -27,22 +27,38 @@ app.use(bodyParser.json()) //config as per line13
 app.use(express.static('public'))
 
 app.get('/', function (req, res) {
+
+    res.render('index')
+})
+
+app.post('/', function (req, res) {
+
+    var msg = greetingApp.langGreet(req.body.namesGreeted, req.body.langType);
+     greetingApp.setName(req.body.namesGreeted)
+    console.log(greetingApp.getCount());
+    
+
     res.render('index', {
-        greeted: greetingApp.getName(),
-        count: greetingApp.getCount()
+        greeted: msg,
+        count: greetingApp.getCount(),
+
     })
-    console.log(greetingApp.getName());
-    // greetingApp.langGreet(req.body.namesGreeted, req.body.langType)
+  
 
 })
 
-app.post('/greeted', function (req, res) {
-    greetingApp.langGreet(req.body.namesGreeted)
-    console.log(greetingApp.langGreet(req.body.namesGreeted, req.body.langType));
+// app.post('/greeted', function (req, res) {
+//     // greetingApp.langGreet(req.body.namesGreeted)
+//     greetingApp.langGreet(req.body.namesGreeted, req.body.language);
+//     // console.log()
 
 
 
-    res.redirect('/')
+//     res.redirect('/')
+// })
+
+app.get('/counter/username', function (req, res) {
+
 })
 const PORT = process.env.PORT || 5000; //config port to use default and define new port
 app.listen(PORT, function () {
