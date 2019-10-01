@@ -20,34 +20,39 @@ describe("greetings", function (namesGreeted) {
 
     it("should greet in English when the English radio button is selected", function () {
         // var greetInstance = greet();
-        var names = Greet()
-        var name = "Siwe";
+        var greetInstance = Greet()
+        var name = "Siwe"
+        var lang = "English"
+       greetInstance.setName("Siwe")
         // var EnglishGreet = "Hello ,"
-        names.setName("Siwe");
+        // greetInstance.langGreet("English")
+        
 
-        assert.equal("Hello, Siwe", names.EnglishGreet(name))
+        assert.equal("Hello, Siwe", greetInstance.langGreet(name, lang))
 
 
     })
     it("should greet in Xhosa when the Xhosa radio button is selected", function () {
         // var greetInstance = greet();
-        var names = Greet()
+        var greetInstance = Greet()
         var name = "Victoria";
-        names.setName("Victoria");
+        var lang = "Xhosa"
+        greetInstance.setName("Victoria");
 
 
-        assert.equal("Mholo, Victoria", names.XhosaGreet(name))
+        assert.equal("Mholo, Victoria", greetInstance.langGreet(name, lang))
 
 
     })
     it("should greet in Afrikaans when the Afrikaans radio button is selected", function () {
         // var greetInstance = greet();
-        var names = Greet()
+        var greetInstance = Greet()
 
          var name = "Sir";
-        names.setName("Sir");
+         var lang = "Afrikaans"
+        greetInstance.setName("Sir");
 
-        assert.equal("Hallo, Sir", names.AfrikaansGreet(name))
+        assert.equal("Hallo, Sir", greetInstance.langGreet(name, lang))
 
 
     })
