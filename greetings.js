@@ -1,42 +1,49 @@
 module.exports = function Greet() {
-  
-  var namesGreeted = {};
 
-    // var greetCount = 0;
+    // var namesGreeted = {};
+    var nameList = [];
 
-    function setName(nameVal) {
-        var name = nameVal.charAt(0).toUpperCase() + nameVal.slice(1);
+    function setName(obj) {
+        var names = obj
+        nameList.push({
+            name: names.name,
+            counter: 1
+        });
 
-        if (namesGreeted[name] === undefined && name !== "") {
-            namesGreeted[name] = 0;
-        }
-        return namesGreeted
     }
 
+
+    function getName() {
+
+        // console.log(Object.keys(namesGreeted));
+
+        return nameList;
+
+    }
+
+
     function langGreet(names, language) {
+
         if (language === "English") {
             return "Hello, " + names;
         }
-    
-    else if (language === "Xhosa") {
-        return "Mholo, " + names;
-    }
-    else if (language === "Afrikaans") {
-        return "Hallo, " + names;
-    }
-}
+        if (language === "Xhosa") {
+            return "Mholo, " + names;
+        }
+        if (language === "Afrikaans") {
+            return "Hallo, " + names;
+        }
 
+    }
 
 
     function getCount() {
-        var count = Object.keys(namesGreeted);
-        return count.length;
-    }
 
-    function getName() {
-        console.log(namesGreeted);
-        
-        return namesGreeted;
+        var count = Object.keys(nameList);
+        console.log(nameList);
+
+        return count.length;
+
     }
 
     return {
@@ -44,6 +51,9 @@ module.exports = function Greet() {
         getName,
         getCount,
         langGreet,
+        // newList,
+        // namesForList
+
 
 
     }

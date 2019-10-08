@@ -1,12 +1,21 @@
 <div class=""> 
+<table>
 
-
-{{#each namesGreeted}}
-
-
-    <p>{{count}}</p>
+<tr>
+    <th> Name</th>
+    <th> Counter</th>
    
+</tr>
+  {{#each names}}
+<tr>
+    <td>{{name}}</td>
+    <td>{{counter}}</td>
+
+
+    </tr>
 
 {{/each}}
+</table>
+
 
 </div>
