@@ -51,6 +51,39 @@ describe('The basic database web app', function () {
         assert.equal(1, greet);
 
     });
+    it('should greet in the language selected', async function () {
+
+        // the Factory Function is called CategoryService
+        let GreetInstance = Greet(pool);
+    
+        await GreetInstance.langGreet("Sino", "English")
+
+        let greet = await GreetInstance.getGreeting();
+        assert.equal("Hello, Sino", greet);
+    });
+
+ it('should greet in the language selected', async function () {
+
+        // the Factory Function is called CategoryService
+        let GreetInstance = Greet(pool);
+    
+        await GreetInstance.langGreet("Siwe", "Xhosa")
+
+        let greet = await GreetInstance.getGreeting();
+        assert.equal("Mholo, Siwe", greet);
+    });
+    it('should greet in the language selected', async function () {
+
+        // the Factory Function is called CategoryService
+        let GreetInstance = Greet(pool);
+    
+        await GreetInstance.langGreet("Lona", "Afrikaans")
+
+        let greet = await GreetInstance.getGreeting();
+        assert.equal("Hallo, Lona", greet);
+    });
+    
+    
 
     after(function () {
         pool.end();
