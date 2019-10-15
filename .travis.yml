@@ -1,3 +1,14 @@
 language: node_js
 node_js:
   - "9.11.2"
+  
+Services:
+  - Postgresql
+
+env:
+  - DATABASE_URL='postgresql://codex:codex123@localhost:5432/GreetingsApp'
+
+
+before_script:
+  - psql -c 'create database  GreetingsApp;' -U postgres
+  - psql -U postgres -d namestoGreet -a -f tables.sql
