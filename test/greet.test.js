@@ -1,108 +1,58 @@
 const assert = require("assert")
 const Greet = require('../greetings')
+const pg = require("pg");
+const Pool = pg.Pool;
 
-describe("greetings", function (namesGreeted) {
-    it("should greet the name that is set", function () {
-        var greetInstance = Greet();
-        greetInstance.setName("Siwe");
+// we are using a special test database for the tests
+const connectionString = process.env.DATABASE_URL || 'postgresql://codex:codex123@localhost:5432/greet_test';
 
-        assert.deepEqual({Siwe: 0}, greetInstance.getName())
+const pool = new Pool({
+    connectionString,
+});
 
+describe('The basic database web app', function () {
+
+    beforeEach(async function () {
+        // clean the tables before each test run
+        await pool.query("delete from namestoGreet;");
+
+    });
+
+    it('should pass the db test', async function () {
+
+        // the Factory Function is called CategoryService
+        let GreetInstance = Greet(pool);
+        await GreetInstance.setName("sino")
+
+        let greet = await GreetInstance.getName();
+        assert.equal(1, greet.length);
+
+    });
+    it('should show the count of the names in the database', async function () {
+
+        // the Factory Function is called CategoryService
+        let GreetInstance = Greet(pool);
+        await GreetInstance.setName("sino")
+        await GreetInstance.setName("sbu")
+
+        let greet = await GreetInstance.getCount();
+        assert.equal(2, greet);
+
+    });
+
+    it('should not count duplicate names in the database', async function () {
+
+        // the Factory Function is called CategoryService
+        let GreetInstance = Greet(pool);
+        await GreetInstance.setName("sino")
+        await GreetInstance.setName("sino")
+
+        let greet = await GreetInstance.getCount();
+        assert.equal(1, greet);
+
+    });
+
+    after(function () {
+        pool.end();
     })
-
-    it("should not greet characters and numbers", function () {
-        var greetInstance = Greet();
-        greetInstance.setName("1");
-
-        assert.deepEqual({ 1: 0 }, greetInstance.getName())
-
-    })
-
-    it("should greet in English when the English radio button is selected", function () {
-        // var greetInstance = greet();
-        var greetInstance = Greet()
-        var name = "Siwe"
-        var lang = "English"
-       greetInstance.setName("Siwe")
-        // var EnglishGreet = "Hello ,"
-        // greetInstance.langGreet("English")
-        
-
-        assert.equal("Hello, Siwe", greetInstance.langGreet(name, lang))
-
-
-    })
-    it("should greet in Xhosa when the Xhosa radio button is selected", function () {
-        // var greetInstance = greet();
-        var greetInstance = Greet()
-        var name = "Victoria";
-        var lang = "Xhosa"
-        greetInstance.setName("Victoria");
-
-
-        assert.equal("Mholo, Victoria", greetInstance.langGreet(name, lang))
-
-
-    })
-    it("should greet in Afrikaans when the Afrikaans radio button is selected", function () {
-        // var greetInstance = greet();
-        var greetInstance = Greet()
-
-         var name = "Sir";
-         var lang = "Afrikaans"
-        greetInstance.setName("Sir");
-
-        assert.equal("Hallo, Sir", greetInstance.langGreet(name, lang))
-
-
-    })
-
-    it("should return total number of names greeted", function () {
-       
-        var names = Greet()
-
-        names.setName("Siwe");
-        assert.equal(1, names.getCount())
-
-
-    })
-    it("should return total number of names greeted", function () {
-       
-        var names = Greet()
-
-        names.setName("Siwe");
-        names.setName ("dfjk");
-
-        assert.equal(2, names.getCount())
-
-
-    })
-    it("should return total number of names greeted", function () {
-       
-        var names = Greet()
-
-        names.setName("Siwe");
-        names.setName ("dfjk");
-        names.setName("Jason");
-
-        assert.equal(3, names.getCount())
-
-
-    })
-
-
-    it("should only allow Siwe to be greeted once", function () {
-      
-        var names = Greet()
-
-      
-        names.setName("Siwe");
-        names.setName("Siwe");
-        names.setName("Siwe");
-        
-        
-        assert.equal(1, names.getCount())
-
-})
-
-})
+});

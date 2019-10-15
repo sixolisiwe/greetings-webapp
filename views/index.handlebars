@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <form action="/" method="POST">
+    <form action="/greet" method="POST">
         <div class="row">
             <div class="col-4">
                 <label for="exampleEmailInput">Name</label>
@@ -43,10 +43,13 @@
 
             <div class="col-4">
                 <input type="submit" name="greetBtn" class="btnClick" value="Greet Me">
+                
             </div>
 
         </div>
     </form>
+
+    <a href="/reset"> <button  name ="resetBtn" class="btnClick" value="Reset"> Reset</button> </a>
 
     <div class="radio_row">
         <div class="col-12">
@@ -54,7 +57,7 @@
 
         </div>
     </div>
-    <div class="col-12 mycounter"><a href="counter"> Users greeted:</a> {{count}}</div>
+    <div class="col-12 mycounter"><a href="/counter"> Users greeted:</a> {{count}}</div>
 
     <div class=" Greet_row">
         <div class="col-12">
@@ -63,7 +66,7 @@
 </div>
     </div>
 <div class="entry">
-    <h3> {{messages}}</h3>
+    <h3 style="color:red"> {{messages}}</h3>
 </div>
 {{!-- <div class="">
 <a href="/counter/username">People greeted</a>

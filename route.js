@@ -1,54 +1,68 @@
 module.exports = function names(greetingApp) {
 
-    function namesToCount(req, res) {
+    async function namesToCount(req, res) {
+
+        let counter = await greetingApp.getCount();
+
         res.render('index', {
-            
-            greeted: greetingApp.langGreet(req.body.namesGreeted, req.body.langType),
-            count: greetingApp.getCount(),
-            messages: req.flash('error')
+            greeted: greetingApp.getGreeting(),
+            count: counter,
+            messages: req.flash('error'),
+
         })
+      
     }
 
     function theList(req, res) {
 
         var name = req.body.namesGreeted
-        var counter = 0
         var lang = req.body.langType
-        if (name === '' || lang === undefined) {
+
+        //console.log(greetingApp.langGreet(name, lang));
+        if (name === '' && lang === undefined) {
             req.flash('error', 'please enter name and select language')
-        } else {
-            var msg = greetingApp.langGreet(req.body.namesGreeted, req.body.langType);
-            greetingApp.setName({
-                name,
-                counter 
-            })
+         
+        } 
+        if (name === '' && lang !== undefined) {
+            req.flash('error', 'please enter a name');
+
         }
+        if (name !== '' && lang === undefined) {
+            req.flash('error', 'please select lang');
 
+        } else {
+         greetingApp.setName(name);
+            greetingApp.langGreet(name, lang);
+            
+        }
+      
 
-        console.log(greetingApp.getName());
-
-        res.render('index', {
-            greeted: msg,
-            count: greetingApp.getCount(),
-            messages: req.flash('error')
-
-        })
-
-
+        res.redirect("/")
     }
 
-    function greetedNames(req, res) {
+   async function greetedNames(req, res) {
 
-        var name = greetingApp.getName()
+        var name = await greetingApp.getName()
 
         res.render('names', {
             names: name
         })
     }
+
+    async function resetsApp(req, res){
+        
+    await greetingApp.toReset();
+  
+    
+
+    res.redirect ('/')
+    }
+
     return {
         namesToCount,
         theList,
-        greetedNames
+        greetedNames,
+        resetsApp
 
 
     }

@@ -1,49 +1,69 @@
-module.exports = function Greet() {
+module.exports = function Greet(pool) {
 
-    // var namesGreeted = {};
-    var nameList = [];
+    var greeting = " "
 
-    function setName(obj) {
-        var names = obj
-        nameList.push({
-            name: names.name,
-            counter: 1
-        });
+
+    async function setName(name) {
+    
+    if(name === ''){ 
+        return;
+    }else{ 
+        let names = await pool.query("SELECT * FROM namestoGreet WHERE people = $1",[name]); 
+     if(names.rowCount === 1){
+       await pool.query('UPDATE namestoGreet SET count = count + 1 WHERE people = $1', [name] )   
+     }else{ 
+        await pool.query("INSERT INTO namestoGreet (people,count) VALUES ($1,$2);", [name, 1])
 
     }
+}
+    }
 
+    async function getName() {
 
-    function getName() {
-
-        // console.log(Object.keys(namesGreeted));
-
-        return nameList;
-
+        let name = await pool.query("SELECT * FROM namestoGreet;");
+        let people = name.rows
+        return people;
     }
 
 
     function langGreet(names, language) {
+        var upperCase = names.charAt(0).toUpperCase()+ names.slice(1);
+        if (upperCase === ''){
+            greeting = " "
+            return;
+        }
 
         if (language === "English") {
-            return "Hello, " + names;
+            greeting = "Hello, " + upperCase;
+        } else if (language === "Xhosa") {
+            greeting = "Mholo, "  + upperCase;
+        } else if (language === "Afrikaans") {
+            greeting = "Hallo, " + upperCase;
+        } else {
+            greeting = " "
         }
-        if (language === "Xhosa") {
-            return "Mholo, " + names;
-        }
-        if (language === "Afrikaans") {
-            return "Hallo, " + names;
-        }
+        
+    }
+
+    function getGreeting() {
+        return greeting;
+    }
+    
+
+    async function getCount() {
+        let count = await pool.query("SELECT COUNT(*) FROM namestoGreet;");
+        let newCount = count.rows[0].count
+        return newCount;
 
     }
 
+   async function toReset(){
+       var query = " DELETE FROM namestoGreet";
+       return pool.query(query);
 
-    function getCount() {
 
-        var count = Object.keys(nameList);
-        console.log(nameList);
-
-        return count.length;
-
+    //  let clear =   await pool.query("DELETE * FROM namestoGreet;");
+    //     return clear;
     }
 
     return {
@@ -51,8 +71,10 @@ module.exports = function Greet() {
         getName,
         getCount,
         langGreet,
-        // newList,
-        // namesForList
+        getGreeting,
+        toReset
+
+
 
 
 
