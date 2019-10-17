@@ -1,18 +1,24 @@
 module.exports = function Greet(pool) {
 
     var greeting = " "
-
-
-    async function setName(name) {
+    var upperCase;
+    var name;
     
-    if(name === ''){ 
+
+
+    async function setName(namez) {
+    
+        upperCase = namez.charAt(0).toUpperCase()+ namez.slice(1).toLowerCase(); 
+    //    name = await pool.query("SELECT distinct people, count FROM namestoGreet;");
+       name = await pool.query("SELECT * FROM namestoGreet");
+    if(upperCase === ''){ 
         return;
     }else{ 
-        let names = await pool.query("SELECT * FROM namestoGreet WHERE people = $1", [name]); 
+        let names = await pool.query("SELECT * FROM namestoGreet WHERE people = $1", [upperCase]); 
      if(names.rowCount === 1){
-       await pool.query('UPDATE namestoGreet SET count = count + 1 WHERE people = $1', [name] );   
+       await pool.query('UPDATE namestoGreet SET count = count + 1 WHERE people = $1', [upperCase] );   
      }else{ 
-        await pool.query("INSERT INTO namestoGreet (people,count) VALUES ($1,$2);", [name, 1]);
+        await pool.query("INSERT INTO namestoGreet (people,count) VALUES ($1,$2);", [upperCase, 1]);
 
     }
 }
@@ -20,16 +26,17 @@ module.exports = function Greet(pool) {
 
     async function getName() {
 
-        let name = await pool.query("SELECT * FROM namestoGreet;");
-        let people = name.rows
-        return people;
+       name = await pool.query("SELECT * FROM namestoGreet");
+  
+        return name.rows;
     }
 
 
     function langGreet(names, language) {
-        var upperCase = names.charAt(0).toUpperCase()+ names.slice(1);    
         
-        if (upperCase === ''){
+           upperCase = names.charAt(0).toUpperCase()+ names.slice(1).toLowerCase();
+        
+        if (upperCase === '' ){
             greeting = ""
             return;
         }
@@ -48,7 +55,7 @@ module.exports = function Greet(pool) {
         } else {
             greeting = ""
         }
-        console.log();
+        // console.log(upperCase);
         
         
     }
@@ -68,7 +75,7 @@ module.exports = function Greet(pool) {
 
    async function toReset(){
        var query = " DELETE FROM namestoGreet";
-       return pool.query(query);
+       return pool.query(query);    
     }
 
     return {

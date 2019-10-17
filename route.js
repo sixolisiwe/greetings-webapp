@@ -3,9 +3,9 @@ module.exports = function names(greetingApp) {
     async function namesToCount(req, res) {
 
         let counter = await greetingApp.getCount();
-        console.log({
-            counter
-        });
+        // console.log({
+        //     counter
+        // });
 
 
         res.render('index', {
@@ -22,11 +22,18 @@ module.exports = function names(greetingApp) {
         var name = req.body.namesGreeted
         var lang = req.body.langType
 
-        console.log({lang, name});
+        //console.log({lang, name});
+        console.log(lang);
         
 
+
         //console.log(greetingApp.langGreet(name, lang));
-        if (name === '' && lang === undefined) {
+        if (name && lang) {
+            await greetingApp.setName(name);
+            await greetingApp.langGreet(name, lang);
+        }
+        else if (name === '' && lang === undefined) {
+
             req.flash('error', 'please enter name and select language')
 
         } else if (name === '') {
@@ -37,10 +44,9 @@ module.exports = function names(greetingApp) {
 
         }
 
-        await greetingApp.setName(name);
-        await greetingApp.langGreet(name, lang);
 
-        
+
+
 
 
         res.redirect("/")
