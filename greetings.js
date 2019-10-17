@@ -29,10 +29,6 @@ module.exports = function Greet(pool) {
     function langGreet(names, language) {
         var upperCase = names.charAt(0).toUpperCase()+ names.slice(1);    
         
-        console.log('------------');
-        console.log({names, language})
-        console.log('------------');
-        
         if (upperCase === ''){
             greeting = ""
             return;
@@ -73,10 +69,6 @@ module.exports = function Greet(pool) {
    async function toReset(){
        var query = " DELETE FROM namestoGreet";
        return pool.query(query);
-
-
-    //  let clear =   await pool.query("DELETE * FROM namestoGreet;");
-    //     return clear;
     }
 
     return {
