@@ -3,6 +3,10 @@ module.exports = function names(greetingApp) {
     async function namesToCount(req, res) {
 
         let counter = await greetingApp.getCount();
+        console.log({
+            counter
+        });
+
 
         res.render('index', {
             greeted: greetingApp.getGreeting(),
@@ -10,37 +14,39 @@ module.exports = function names(greetingApp) {
             messages: req.flash('error'),
 
         })
-      
+
     }
 
-    function theList(req, res) {
+    async function theList(req, res) {
 
         var name = req.body.namesGreeted
         var lang = req.body.langType
 
+        console.log({lang, name});
+        
+
         //console.log(greetingApp.langGreet(name, lang));
         if (name === '' && lang === undefined) {
             req.flash('error', 'please enter name and select language')
-         
-        } 
-        if (name === '' && lang !== undefined) {
+
+        } else if (name === '') {
             req.flash('error', 'please enter a name');
 
-        }
-        if (name !== '' && lang === undefined) {
-            req.flash('error', 'please select lang');
+        } else if (lang === undefined) {
+            req.flash('error', 'please select a language');
 
-        } else {
-         greetingApp.setName(name);
-            greetingApp.langGreet(name, lang);
-            
         }
-      
+
+        await greetingApp.setName(name);
+        await greetingApp.langGreet(name, lang);
+
+        
+
 
         res.redirect("/")
     }
 
-   async function greetedNames(req, res) {
+    async function greetedNames(req, res) {
 
         var name = await greetingApp.getName()
 
@@ -49,13 +55,13 @@ module.exports = function names(greetingApp) {
         })
     }
 
-    async function resetsApp(req, res){
-        
-    await greetingApp.toReset();
-  
-    
+    async function resetsApp(req, res) {
 
-    res.redirect ('/')
+        await greetingApp.toReset();
+
+
+
+        res.redirect('/')
     }
 
     return {

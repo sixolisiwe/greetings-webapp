@@ -1,8 +1,10 @@
 body {font-size: xx-large;
-    background-image: url(/public/leave.jpg);}
+    background-image: url(/public/leave.jpg);
+  text-align: center;
+background-color: salmon;}
     
     
-    h1 {text-align:center;}
+    h4 {text-align:center;}
     /* h1 {border-style: solid;}
     h1 {
         margin-top: 150px;
@@ -15,11 +17,11 @@ body {font-size: xx-large;
         margin-bottom: 150px;
         margin-right: 200px;
         margin-left: 200px;} */
-    h4{text-align:justify;}
+    /* h4{text-align:center}
         .Name_row{
           display: flex;
           justify-content: center;
-        }
+        } */
     
         .radio_row{
           display: flex;

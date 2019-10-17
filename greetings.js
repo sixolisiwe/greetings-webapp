@@ -8,11 +8,11 @@ module.exports = function Greet(pool) {
     if(name === ''){ 
         return;
     }else{ 
-        let names = await pool.query("SELECT * FROM namestoGreet WHERE people = $1",[name]); 
+        let names = await pool.query("SELECT * FROM namestoGreet WHERE people = $1", [name]); 
      if(names.rowCount === 1){
-       await pool.query('UPDATE namestoGreet SET count = count + 1 WHERE people = $1', [name] )   
+       await pool.query('UPDATE namestoGreet SET count = count + 1 WHERE people = $1', [name] );   
      }else{ 
-        await pool.query("INSERT INTO namestoGreet (people,count) VALUES ($1,$2);", [name, 1])
+        await pool.query("INSERT INTO namestoGreet (people,count) VALUES ($1,$2);", [name, 1]);
 
     }
 }
@@ -27,9 +27,19 @@ module.exports = function Greet(pool) {
 
 
     function langGreet(names, language) {
-        var upperCase = names.charAt(0).toUpperCase()+ names.slice(1);
+        var upperCase = names.charAt(0).toUpperCase()+ names.slice(1);    
+        
+        console.log('------------');
+        console.log({names, language})
+        console.log('------------');
+        
         if (upperCase === ''){
-            greeting = " "
+            greeting = ""
+            return;
+        }
+
+        if (!language){
+            greeting = ""
             return;
         }
 
@@ -40,10 +50,13 @@ module.exports = function Greet(pool) {
         } else if (language === "Afrikaans") {
             greeting = "Hallo, " + upperCase;
         } else {
-            greeting = " "
+            greeting = ""
         }
+        console.log();
+        
         
     }
+
 
     function getGreeting() {
         return greeting;
