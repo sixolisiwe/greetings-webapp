@@ -10,7 +10,7 @@ addons:
 
 
 env:
-  - DATABASE_URL='postgresql://postgresql@localhost:5432/GreetingsApp';
+  - DATABASE_URL='postgres://postgres@localhost:5432/GreetingsApp';
 
 
 before_script:
