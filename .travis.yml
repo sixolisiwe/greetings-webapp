@@ -15,4 +15,5 @@ env:
 
 before_script:
   - psql -c 'create database  GreetingsApp;' -U postgres
+  - psql -c 'create user codex WITH PASSWORD 'codex123';' -U postgres
   # - psql -U postgres -d GreetingsApp -a -f tables.sql
