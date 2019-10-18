@@ -1,2 +1,2 @@
 # greetings-webapp
-https://travis-ci.org/sixolisiwe/greetings-webapp.svg?branch=master
+[![Build Status](https://travis-ci.org/sixolisiwe/greetings-webapp.svg?branch=master)](https://travis-ci.org/sixolisiwe/greetings-webapp)
