@@ -3,7 +3,11 @@ node_js:
   - "9.11.2"
   
 Services:
-  - Postgresql
+  - postgresql
+
+addons:
+    postgresql: '9.6'
+
 
 env:
   - DATABASE_URL='postgresql://postgresql@localhost:5432/GreetingsApp';
