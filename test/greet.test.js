@@ -4,18 +4,19 @@ const pg = require("pg");
 const Pool = pg.Pool;
 
 // we are using a special test database for the tests
-const connectionString = process.env.DATABASE_URL || 'postgres://thsbnfgjjqqfbo:3f6718d79d0935d7304ce3a4c0fc2cc2980856bcf3dd1336445049281aa74b78@ec2-23-21-148-223.compute-1.amazonaws.com:5432/d6i3sd32rjjbeh';
+const connectionString = process.env.DATABASE_URL || 'postgresql://codex:codex123@localhost:5432/greet_test';
+
 const pool = new Pool({
     connectionString,
 });
 
 describe('The basic database web app', function () {
 
-    // beforeEach(async function () {
-    //     // clean the tables before each test run
-    //     await pool.query("delete from namestoGreet;");
+    beforeEach(async function () {
+        // clean the tables before each test run
+        await pool.query("delete from namestoGreet;");
 
-    // });
+    });
 
     it('should pass the db test', async function () {
 
