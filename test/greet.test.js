@@ -11,11 +11,11 @@ const pool = new Pool({
 
 describe('The basic database web app', function () {
 
-    beforeEach(async function () {
-        // clean the tables before each test run
-        await pool.query("delete from namestoGreet;");
+    // beforeEach(async function () {
+    //     // clean the tables before each test run
+    //     await pool.query("delete from namestoGreet;");
 
-    });
+    // });
 
     it('should pass the db test', async function () {
 
