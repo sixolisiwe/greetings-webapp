@@ -22,12 +22,7 @@ module.exports = function names(greetingApp) {
         var name = req.body.namesGreeted
         var lang = req.body.langType
 
-        //console.log({lang, name});
-        console.log(lang);
-        
-
-
-        //console.log(greetingApp.langGreet(name, lang));
+    
         if (name && lang) {
             await greetingApp.setName(name);
             await greetingApp.langGreet(name, lang);
@@ -43,10 +38,6 @@ module.exports = function names(greetingApp) {
             req.flash('error', 'please select a language');
 
         }
-
-
-
-
 
 
         res.redirect("/")

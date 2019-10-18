@@ -5,24 +5,7 @@ background-color: salmon;}
     
     
     h4 {text-align:center;}
-    /* h1 {border-style: solid;}
-    h1 {
-        margin-top: 150px;
-        margin-bottom: 150px;
-        margin-right: 200px;
-        margin-left: 200px;
-      } */
-    /* h2 {border-style: solid;
-        margin-top: 100px;
-        margin-bottom: 150px;
-        margin-right: 200px;
-        margin-left: 200px;} */
-    /* h4{text-align:center}
-        .Name_row{
-          display: flex;
-          justify-content: center;
-        } */
-    
+  
         .radio_row{
           display: flex;
           justify-content: center;

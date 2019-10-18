@@ -30,7 +30,7 @@ describe('The basic database web app', function () {
     });
     it('should show the count of the names in the database', async function () {
 
-        // the Factory Function is called CategoryService
+        
         let GreetInstance = Greet(pool);
         await GreetInstance.setName("sino")
         await GreetInstance.setName("sbu")
@@ -42,7 +42,7 @@ describe('The basic database web app', function () {
 
     it('should not count duplicate names in the database', async function () {
 
-        // the Factory Function is called CategoryService
+      
         let GreetInstance = Greet(pool);
         await GreetInstance.setName("sino")
         await GreetInstance.setName("sino")
@@ -53,7 +53,7 @@ describe('The basic database web app', function () {
     });
     it('should greet in the language selected', async function () {
 
-        // the Factory Function is called CategoryService
+       
         let GreetInstance = Greet(pool);
     
         await GreetInstance.langGreet("Sino", "English")
@@ -64,7 +64,7 @@ describe('The basic database web app', function () {
 
  it('should greet in the language selected', async function () {
 
-        // the Factory Function is called CategoryService
+   
         let GreetInstance = Greet(pool);
     
         await GreetInstance.langGreet("Siwe", "Xhosa")
@@ -74,7 +74,7 @@ describe('The basic database web app', function () {
     });
     it('should greet in the language selected', async function () {
 
-        // the Factory Function is called CategoryService
+       
         let GreetInstance = Greet(pool);
     
         await GreetInstance.langGreet("Lona", "Afrikaans")

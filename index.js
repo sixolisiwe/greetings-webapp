@@ -4,8 +4,6 @@ const exphbs = require('express-handlebars'); //reference express-hbs after down
 
 const Greet = require('./greetings');
 const routes = require('./route');
-// const listedNames = require('./route');
-// const test = require('./route');
 const app = express(); //instance of app
 
 const flash = require('express-flash');
@@ -24,10 +22,6 @@ const pool = new Pool({
 });
 
 
-
-// const namesCount = listOfNames(greetingApp);
-// const counted = listedNames(greetingApp);
-// const tested = test(greetingApp)
 
 const greetingApp = Greet(pool);
 const myRoutes = routes(greetingApp)
