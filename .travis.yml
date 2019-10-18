@@ -6,7 +6,7 @@ Services:
   - Postgresql
 
 env:
-  - DATABASE_URL='postgresql://codex:codex123@localhost:5432/GreetingsApp'
+  - DATABASE_URL='postgresql://postgresql@localhost:5432/GreetingsApp';
 
 
 before_script:
