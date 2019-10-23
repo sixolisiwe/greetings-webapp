@@ -17,7 +17,7 @@ module.exports = function names(greetingApp) {
 
     }
 
-    async function theList(req, res) {
+    async function theList(req, rescode) {
 
         var name = req.body.namesGreeted
         var lang = req.body.langType

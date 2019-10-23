@@ -19,4 +19,7 @@ background-color: salmon;}
         display: flex;
         justify-content: center;
       }
-    
+    tableSec{
+       border: 1;
+    }
+      
